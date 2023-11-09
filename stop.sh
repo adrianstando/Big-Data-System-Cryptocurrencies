@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Get the current parent directory
+parent_directory=$(pwd)
+
 # Loop through each subdirectory starting with the prefix 'COMPOSE_'
 for directory in COMPOSE_*/; do
     # Remove trailing slash to get the directory name
