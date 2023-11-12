@@ -1,0 +1,8 @@
+fastapi==0.104.1
+uvicorn==0.24.0.post1
+selenium==3.141.0
+webdriver-manager==4.0.1
+beautifulsoup4==4.11.1
+requests==2.31.0
+urllib3==1.26.14
+lxml==4.9.1

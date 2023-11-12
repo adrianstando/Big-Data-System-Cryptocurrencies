@@ -119,6 +119,22 @@ services:
       - TS_ROUTES=10.0.0.0/16
       - TS_HOSTNAME=nifi-hdfs
 
+  # Python news scraper server
+  news-scraper:
+    build:
+      context: ${path}/scraper
+      dockerfile: Dockerfile
+    container_name: news-scraper
+    hostname: news-scraper
+    restart: unless-stopped
+    ports:
+      - 8012:80
+    networks:
+      big-data-net:
+        ipv4_address: 10.0.0.8
+    env_file:
+      - stack.env
+
 networks:
   big-data-net:
     name: big-data-net
