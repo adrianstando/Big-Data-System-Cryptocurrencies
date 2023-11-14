@@ -15,9 +15,17 @@ While running for the first time, the following steps had to be done:
 3. When the contriners are running, run the following commands:
 
     ```
-    docker cp hdfs-namenode:/hadoop/dfs/name/* ./hdfs/namenode
-    docker cp hdfs-namenode:/etc/hadoop/* ./hdfs/namenode_etc
-    docker cp nifi:/opt/nifi/nifi-current/conf/* ./nifi
+    docker cp hdfs-namenode:/hadoop/dfs/name/ ./hdfs/namenode
+    cp -r ./hdfs/namenode/name/* ./hdfs/namenode/
+    rm -rf ./hdfs/namenode/name
+
+    docker cp hdfs-namenode:/etc/hadoop/ ./hdfs/namenode_etc
+    cp -r ./hdfs/namenode_etc/hadoop/* ./hdfs/namenode_etc/
+    rm -rf ./hdfs/namenode_etc/hadoop
+
+    docker cp nifi:/opt/nifi/nifi-current/conf/ ./nifi
+    cp -r ./nifi/conf/* ./nifi/
+    rm -rf ./nifi/conf
     ```
 
 4. Run
