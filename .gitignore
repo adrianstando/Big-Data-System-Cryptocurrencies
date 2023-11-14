@@ -6,6 +6,5 @@ COMPOSE_nifi-hdfs/hdfs/namenode_etc
 !COMPOSE_nifi-hdfs/hdfs/namenode_etc/.gitkeep
 COMPOSE_nifi-hdfs/hdfs/datanode
 !COMPOSE_nifi-hdfs/hdfs/datanode/.gitkeep
-COMPOSE_nifi-hdfs/nifi/archive
 **/__pycache__/
 
