@@ -17,6 +17,7 @@ While running for the first time, the following steps had to be done:
     ```
     docker cp hdfs-namenode:/hadoop/dfs/name/* ./hdfs/namenode
     docker cp hdfs-namenode:/etc/hadoop/* ./hdfs/namenode_etc
+    docker cp nifi:/opt/nifi/nifi-current/conf/* ./nifi
     ```
 
 4. Run
