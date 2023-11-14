@@ -33,9 +33,9 @@ While running for the first time, the following steps had to be done:
     docker-compose --env-file stack.env up -d
     ```
 
-## ATTENTION
+## ATTENTION - NiFI
 
-While working with nifi, please remove all files from `archive` folder except the newest one - this contains the latest version.
+Template for NiFi is in `template.xml` file. When running NiFi, please upload template and put it on the working area.
 
 ## Other comments:
 
