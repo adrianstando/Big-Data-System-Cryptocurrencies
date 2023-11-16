@@ -43,7 +43,7 @@ def get_news(min_date, api_key):
                 out['publish_timestamp'] = date
                 res.append(out)
         else:
-            break
+            continue
 
     browser.close()
 
