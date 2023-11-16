@@ -1,0 +1,57 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: "3"
+
+services:
+  kafka-0:
+    image: docker.io/bitnami/kafka:3.6
+    container_name: kafka_0
+    hostname: kafka_0
+    restart: unless-stopped
+    ports:
+      - "9094:9094"
+    networks:
+      big-data-net:
+        ipv4_address: 10.0.1.0
+    environment:
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
+    volumes:
+      - kafka_0_data:/bitnami/kafka
+    env_file:
+      - stack.env
+  kafka-1:
+    image: docker.io/bitnami/kafka:3.6
+    container_name: kafka_1
+    hostname: kafka_1
+    restart: unless-stopped
+    ports:
+      - "9095:9094"
+    networks:
+      big-data-net:
+        ipv4_address: 10.0.1.1
+    environment:
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
+    volumes:
+      - kafka_1_data:/bitnami/kafka
+    env_file:
+      - stack.env
+
+volumes:
+  kafka_0_data:
+    driver: local
+  kafka_1_data:
+    driver: local
+networks:
+  big-data-net:
+    name: big-data-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16
