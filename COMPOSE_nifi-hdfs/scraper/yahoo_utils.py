@@ -35,7 +35,7 @@ def strip_unwanted_urls(urls):
 
 def is_finance_yahoo(url):
     parsed_url = urlparse(url)
-    return parsed_url.hostname == 'finance.yahoo.com'
+    return 'finance.yahoo' in str(parsed_url.hostname)
 
 
 def scrape_and_process_yahoo(URLs):

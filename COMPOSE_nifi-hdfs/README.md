@@ -62,4 +62,4 @@ In the `stack.env` file, set the following variables:
 
 * `API_KEY_NEWSAPI` - authentication key to News API
 
-* `path` - full path to the current directory (can be left as `.`)
+* `path` - absolute path to the current directory (can be left as `.`)
