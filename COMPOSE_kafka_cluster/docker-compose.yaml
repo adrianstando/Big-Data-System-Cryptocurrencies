@@ -9,7 +9,7 @@ services:
     ports:
       - "9094:9094"
     networks:
-      big-data-net:
+      big-data-net-kafka:
         ipv4_address: 10.1.0.2
     environment:
       - KAFKA_CFG_NODE_ID=0
@@ -29,7 +29,7 @@ services:
     ports:
       - "9095:9094"
     networks:
-      big-data-net:
+      big-data-net-kafka:
         ipv4_address: 10.1.0.3
     environment:
       - KAFKA_CFG_NODE_ID=1
@@ -52,8 +52,8 @@ services:
       - NET_ADMIN
       - SYS_ADMIN
     networks:
-      big-data-net:
-        ipv4_address: 10.1.0.3
+      big-data-net-kafka:
+        ipv4_address: 10.1.0.4
     volumes:
       - /dev/net/tun:/dev/net/tun
       - ${path}/tailscale:/var/lib
