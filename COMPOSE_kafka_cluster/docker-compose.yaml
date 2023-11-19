@@ -64,7 +64,7 @@ services:
       - TS_HOSTNAME=kafka
 
 networks:
-  big-data-net:
+  big-data-net-kafka:
     name: big-data-net-kafka
     driver: bridge
     ipam:
