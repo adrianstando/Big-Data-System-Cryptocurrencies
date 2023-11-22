@@ -88,7 +88,7 @@ services:
       big-data-net:
         ipv4_address: 10.0.0.6
     volumes:
-      - ${path}/nifi/nifi_data:/opt/nifi/nifi-current/conf
+      - ${path}/nifi:/opt/nifi/nifi-current/conf
       - ${path}/hdfs/namenode_etc:/hadoop_namenode_etc
     environment:
       - NIFI_WEB_HTTP_PORT=8080
