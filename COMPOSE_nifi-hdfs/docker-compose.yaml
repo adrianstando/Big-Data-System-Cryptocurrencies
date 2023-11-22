@@ -95,9 +95,9 @@ services:
       - news_api_key=${NEWS_IO_API_key}
 
   # tailscale
-  tailscale:
+  tailscale_nifi:
     image: tailscale/tailscale:stable
-    container_name: tailscale
+    container_name: tailscale_nifi
     hostname: tailscale
     restart: unless-stopped
     privileged: true
