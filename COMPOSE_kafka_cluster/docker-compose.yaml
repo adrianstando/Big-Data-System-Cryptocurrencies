@@ -1,72 +1,57 @@
+
 version: "3"
 
 services:
-  kafka-0:
-    image: docker.io/bitnami/kafka:3.6
-    container_name: kafka_0
-    hostname: kafka_0
+  kafka0:
+    image: docker.io/bitnami/kafka:3.4
+    container_name: kafka0
+    hostname: kafka0
     restart: unless-stopped
     ports:
-      - "9094:9094"
-    networks:
-      big-data-net-kafka:
-        ipv4_address: 10.1.0.2
+      # - "9094:9094"
+      - "9094:9092"
+    # networks:
+    #   big-data-net-kafka:
+    #     ipv4_address: 10.1.0.3
     environment:
       - KAFKA_CFG_NODE_ID=0
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka0:9093,1@kafka1:9093
       - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
-      - ${path}/kafka_0_data:/bitnami/kafka
+      - ./kafka0_data:/bitnami/kafka
     env_file:
       - stack.env
-
-  kafka-1:
-    image: docker.io/bitnami/kafka:3.6
-    container_name: kafka_1
-    hostname: kafka_1
+  kafka1:
+    image: docker.io/bitnami/kafka:3.4
+    container_name: kafka1
+    hostname: kafka_
     restart: unless-stopped
     ports:
-      - "9095:9094"
-    networks:
-      big-data-net-kafka:
-        ipv4_address: 10.1.0.3
+      # - "9095:9094"
+      - "9095:9092"
+    # networks:
+    #   big-data-net-kafka:
+    #     ipv4_address: 10.1.0.4
     environment:
       - KAFKA_CFG_NODE_ID=1
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka0:9093,1@kafka1:9093
       - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
-      - ${path}/:/bitnami/kafka
+      - ./kafka1_data:/bitnami/kafka
     env_file:
       - stack.env
 
-  # tailscale
-  tailscale_kafka:
-    image: tailscale/tailscale:stable
-    container_name: tailscale_kafka
-    hostname: tailscale
-    restart: unless-stopped
-    privileged: true
-    cap_add:
-      - NET_ADMIN
-      - SYS_ADMIN
-    networks:
-      big-data-net-kafka:
-        ipv4_address: 10.1.0.4
-    volumes:
-      - /dev/net/tun:/dev/net/tun
-      - ${path}/tailscale:/var/lib
-    env_file:
-      - stack.env
-    environment:
-      - TS_ROUTES=10.1.0.0/16
-      - TS_HOSTNAME=kafka
-
-networks:
-  big-data-net-kafka:
-    name: big-data-net-kafka
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.1.0.0/16
+volumes:
+  kafka0_data:
+    driver: local
+  kafka1_data:
+    driver: local
+# networks:
+#   big-data-net-kafka:
+#     name: big-data-net-kafka
+#     driver: bridge
+#     ipam:
+#       config:
+#         - subnet: 10.1.0.0/16
