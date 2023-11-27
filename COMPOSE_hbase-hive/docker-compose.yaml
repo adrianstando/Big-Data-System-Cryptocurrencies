@@ -1,0 +1,68 @@
+version: '3'
+services:
+  hive-server:
+    image: bde2020/hive:2.3.2-postgresql-metastore
+    container_name: hive-server
+    volumes:
+      - ./hive_server:/hive_server
+    env_file:
+      - ./stack.env
+    environment:
+      HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore/metastore"
+      SERVICE_PRECONDITION: "hive-metastore:9083"
+    #depends_on:
+    #  - hive-metastore
+    ports:
+      - 10000:10000
+
+  hive-metastore:
+    image: bde2020/hive:2.3.2-postgresql-metastore
+    container_name: hive-metastore
+    env_file:
+      - ./stack.env
+    command: /opt/hive/bin/hive --service metastore
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870 datanode:9864 hive-metastore-postgresql:5432"
+    #depends_on:
+    #  - hive-metastore-postgresql
+    ports:
+      - 9083:9083
+
+  hive-metastore-postgresql:
+    image: bde2020/hive-metastore-postgresql:2.3.0
+    container_name: hive-metastore-postgresql
+    volumes:
+      - ./metastore-postgresql/postgresql/data:/var/lib/postgresql/data
+    #depends_on:
+    #  - datanode
+
+  hbase:
+    image: bde2020/hbase-standalone:1.0.0-hbase1.2.6
+    container_name: hbase
+    volumes:
+      - hbase_data:/hbase_data
+      - hbase_zookeeper_data:/zookeeper_data
+    ports:
+      - 16000:16000
+      - 16010:16010
+      - 16020:16020
+      - 16030:16030
+      - 2888:2888
+      - 3888:3888
+      - 2181:2181
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870 datanode:9864"
+    env_file:
+      - ./stack.env
+
+volumes:
+  hbase_data:
+  hbase_zookeeper_data:
+
+networks:
+  big-data-net:
+    name: big-data-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16

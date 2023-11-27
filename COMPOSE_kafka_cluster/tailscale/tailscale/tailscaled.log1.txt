@@ -1,0 +1,6 @@
+{"logtail": {"client_time": "2023-11-22T13:10:08.025341402Z","proc_id": 2386748041,"proc_seq": 192}, "metrics": "I180cI2c0c","text": "tailscaled got signal terminated; shutting down\n"}
+{"logtail": {"client_time": "2023-11-22T13:10:08.026025783Z","proc_id": 2386748041,"proc_seq": 193}, "text": "EditPrefs: MaskedPrefs{WantRunning=false LoggedOut=true}\n"}
+{"logtail": {"client_time": "2023-11-22T13:10:08.026597966Z","proc_id": 2386748041,"proc_seq": 194}, "text": "control: setPaused(true)\n"}
+{"logtail": {"client_time": "2023-11-22T13:10:08.026910759Z","proc_id": 2386748041,"proc_seq": 195}, "text": "Switching ipn state Running -> Stopped (WantRunning=false, nm=true)\n"}
+{"logtail": {"client_time": "2023-11-22T13:10:08.027332766Z","proc_id": 2386748041,"proc_seq": 196}, "text": "magicsock: SetPrivateKey called (zeroed)\n"}
+{"logtail": {"client_time": "2023-11-22T13:10:08.027580235Z","proc_id": 2386748041,"proc_seq": 197}, "text": "magicsock: closing connection to derp-22 (zero-private-key), age 16m49s\n"}
