@@ -42,9 +42,9 @@ services:
       - stack.env
 
   # tailscale
-  tailscale:
+  tailscale_kafka:
     image: tailscale/tailscale:stable
-    container_name: tailscale
+    container_name: tailscale_kafka
     hostname: tailscale
     restart: unless-stopped
     privileged: true
