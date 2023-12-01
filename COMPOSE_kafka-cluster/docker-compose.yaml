@@ -1,0 +1,71 @@
+
+version: "3"
+
+services:
+  kafka0:
+    image: docker.io/bitnami/kafka:3.4
+    container_name: kafka0
+    hostname: kafka0
+    restart: unless-stopped
+    ports:
+      # - "9094:9094"
+      - "9094:9092"
+    networks:
+      big-data-net:
+        ipv4_address: 10.0.0.10
+    environment:
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@10.0.0.10:9093,1@10.0.0.11:9093
+      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://10.0.0.10:9092,CONTROLLER://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://10.0.0.10:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+    volumes:
+      - ${path}/kafka0_data:/bitnami/kafka
+    env_file:
+      - stack.env
+    
+  kafka1:
+    image: docker.io/bitnami/kafka:3.4
+    container_name: kafka1
+    hostname: kafka1
+    restart: unless-stopped
+    ports:
+      - "9095:9092"
+    networks:
+      big-data-net:
+        ipv4_address: 10.0.0.11
+    environment:
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@10.0.0.10:9093,1@10.0.0.11:9093
+      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://10.0.0.11:9092,CONTROLLER://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://10.0.0.11:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+    volumes:
+      - ${path}/kafka1_data:/bitnami/kafka
+    env_file:
+      - stack.env
+  
+
+
+volumes:
+  kafka0_data:
+    driver: local
+  kafka1_data:
+    driver: local
+networks:
+  big-data-net:
+    name: big-data-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16
+    external: true
+    
