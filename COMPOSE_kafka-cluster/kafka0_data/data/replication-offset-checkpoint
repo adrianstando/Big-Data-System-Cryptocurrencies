@@ -1,8 +1,33 @@
 0
-6
-crypto_rates 1 0
-api_news 0 0
-api_news 1 0
-crypto_rates 0 0
-scraped_news 0 0
-scraped_news 1 0
+31
+__transaction_state 0 0
+crypto 0 0
+__transaction_state 15 0
+api_news 0 4
+__transaction_state 18 0
+__transaction_state 30 0
+__transaction_state 21 0
+__transaction_state 26 0
+__transaction_state 17 0
+__transaction_state 10 0
+__transaction_state 29 0
+__transaction_state 24 0
+__transaction_state 5 0
+__transaction_state 41 0
+__transaction_state 34 0
+__transaction_state 49 0
+__transaction_state 7 0
+__transaction_state 9 352
+__transaction_state 42 0
+__transaction_state 44 0
+__transaction_state 3 0
+__transaction_state 13 4
+scraped_news 0 10
+scraped_news 1 10
+crypto 1 0
+__transaction_state 38 0
+__transaction_state 46 0
+api_news 1 6
+__transaction_state 23 0
+__transaction_state 33 0
+__transaction_state 36 0

@@ -27,6 +27,8 @@ services:
       - ${path}/kafka0_data:/bitnami/kafka
     env_file:
       - stack.env
+    cap_add:
+      - NET_ADMIN
     
   kafka1:
     image: docker.io/bitnami/kafka:3.4
@@ -52,6 +54,8 @@ services:
       - ${path}/kafka1_data:/bitnami/kafka
     env_file:
       - stack.env
+    cap_add:
+      - NET_ADMIN
   
 
 
@@ -60,6 +64,7 @@ volumes:
     driver: local
   kafka1_data:
     driver: local
+
 networks:
   big-data-net:
     name: big-data-net

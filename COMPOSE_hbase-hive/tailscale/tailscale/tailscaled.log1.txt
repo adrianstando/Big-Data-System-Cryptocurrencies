@@ -1,0 +1,3 @@
+{"logtail": {"client_time": "2023-12-03T16:46:22.597444283Z","proc_id": 4075799410,"proc_seq": 782}, "metrics": "I1816I2e0eI1a0aI300aI3202I3602I3802I3c02I1c02","text": "tailscaled got signal terminated; shutting down\n"}
+{"logtail": {"client_time": "2023-12-03T16:46:22.598172034Z","proc_id": 4075799410,"proc_seq": 783}, "text": "EditPrefs: MaskedPrefs{WantRunning=false LoggedOut=true}\n"}
+{"logtail": {"client_time": "2023-12-03T16:46:22.599081383Z","proc_id": 4075799410,"proc_seq": 784}, "text": "control: setPaused(true)\n"}

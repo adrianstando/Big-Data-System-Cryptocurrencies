@@ -17,6 +17,8 @@ services:
         ipv4_address: 10.4.0.2
     ports:
       - 10000:10000
+    cap_add:
+      - NET_ADMIN
 
   hive-metastore:
     image: bde2020/hive:2.3.2-postgresql-metastore
@@ -33,6 +35,8 @@ services:
         ipv4_address: 10.4.0.3
     ports:
       - 9083:9083
+    cap_add:
+      - NET_ADMIN
 
   hive-metastore-postgresql:
     image: bde2020/hive-metastore-postgresql:2.3.0
@@ -42,6 +46,8 @@ services:
     networks:
       big-data-net-hive-hbase:
         ipv4_address: 10.4.0.4
+    cap_add:
+      - NET_ADMIN
     #depends_on:
     #  - datanode
 
@@ -66,6 +72,8 @@ services:
         ipv4_address: 10.4.0.5
     env_file:
       - ./stack.env
+    cap_add:
+      - NET_ADMIN
 
   tailscale_hive-hbase:
     image: tailscale/tailscale:stable

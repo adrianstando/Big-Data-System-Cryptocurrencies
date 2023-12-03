@@ -1,0 +1,11 @@
+Issues with containers:
+- Used tailscale for distributed computing which generated lots of issues (tens of hours spent by whole team)
+- We designed first version of docker-compose for nifi and hdfs - only one of us knew how it actually works, and it worked properly only on 1 PC.
+- We had issues with adding a volume to hdfs and nifi, so we dont lose the data from both. We had to find a work-araound by copying files from nifi to local, and only then mounting the volume. A few hours lost.
+- During the development and update to nifi occured, where they changed the requirements, and we had mount the logs file to the volume additionally. Another hour lost.
+- We had major issues with connecting kafka to anything, after 5 hours we finally found out that it has to be in the same network as hdfs and nifi.
+- Only then we realized that for the containers to see objects in different subnets we have t attach them to static IPs, so we had to design a whole network structure from scratch.. another few hours.
+- We had a problems with running jupyter lab to develop the code, as it didn't see anything. It turned out that we had to configure route tables for all containers so they see themselves in various subnets.
+- We couldn't do it so easily, as none of the services had iproute2 package installed, and these were different distributions.. another hours lost
+- We had to write bash scripts for this purpuse, even though none of us actually did this before. Lots of unknown erros occured while we were developing a script which automatically generates proper route tables for each container so they can see each other.
+- We wanted to use already created files for the Kafka, so they contain topics, but it didn't work and caused kafka to stop working. Half an hour lost.

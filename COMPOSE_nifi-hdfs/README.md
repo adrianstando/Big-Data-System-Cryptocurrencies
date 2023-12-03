@@ -26,6 +26,10 @@ While running for the first time, the following steps had to be done:
     docker cp nifi:/opt/nifi/nifi-current/conf/ ./nifi
     cp -r ./nifi/conf/* ./nifi/
     rm -rf ./nifi/conf
+	
+	docker cp nifi:/opt/nifi/nifi-current/logs/ ./nifi
+    cp -r ./nifi/logs/* ./nifi/
+    rm -rf ./nifi/logs
     ```
 
 4. Run

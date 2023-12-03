@@ -1,0 +1,8 @@
+{"logtail": {"client_time": "2023-12-03T16:46:33.753959837Z","proc_id": 1427766596,"proc_seq": 252}, "text": "tailscaled got signal terminated; shutting down\n"}
+{"logtail": {"client_time": "2023-12-03T16:46:33.754404431Z","proc_id": 1427766596,"proc_seq": 253}, "text": "EditPrefs: MaskedPrefs{WantRunning=false LoggedOut=true}\n"}
+{"logtail": {"client_time": "2023-12-03T16:46:33.754884625Z","proc_id": 1427766596,"proc_seq": 254}, "text": "control: setPaused(true)\n"}
+{"logtail": {"client_time": "2023-12-03T16:46:33.755159307Z","proc_id": 1427766596,"proc_seq": 255}, "text": "Switching ipn state Running -> Stopped (WantRunning=false, nm=true)\n"}
+{"logtail": {"client_time": "2023-12-03T16:46:33.755388135Z","proc_id": 1427766596,"proc_seq": 256}, "text": "control: mapRoutine: paused\n"}
+{"logtail": {"client_time": "2023-12-03T16:46:33.755618314Z","proc_id": 1427766596,"proc_seq": 257}, "text": "control: mapRoutine: awaiting unpause\n"}
+{"logtail": {"client_time": "2023-12-03T16:46:33.755865855Z","proc_id": 1427766596,"proc_seq": 258}, "text": "control: updateRoutine: awaiting unpause\n"}
+{"logtail": {"client_time": "2023-12-03T16:46:33.756063197Z","proc_id": 1427766596,"proc_seq": 259}, "v":1,"text": "control: authRoutine: context done.\n"}

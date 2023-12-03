@@ -3,8 +3,12 @@
 # Get the current parent directory
 parent_directory=$(pwd)
 
-# Loop through each subdirectory starting with the prefix 'COMPOSE_'
-for directory in COMPOSE_*/; do
+
+COMPOSE_folders=("COMPOSE_nifi-hdfs" "COMPOSE_kafka-cluster" "COMPOSE_spark" "COMPOSE_hbase-hive")
+
+echo ${COMPOSE_folders[*]}
+
+for directory in ${COMPOSE_folders[*]}; do
     # Remove trailing slash to get the directory name
     dir_name="${directory%/}"
 
