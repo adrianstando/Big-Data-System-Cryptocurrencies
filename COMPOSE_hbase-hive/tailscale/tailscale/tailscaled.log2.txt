@@ -1,0 +1,2 @@
+{"logtail": {"client_time": "2023-12-04T12:25:07.898486775Z","proc_id": 1163748696,"proc_seq": 165}, "text": "tailscaled got signal terminated; shutting down\n"}
+{"logtail": {"client_time": "2023-12-04T12:25:07.899695142Z","proc_id": 1163748696,"proc_seq": 166}, "text": "EditPrefs: MaskedPrefs{WantRunning=false LoggedOut=true}\n"}

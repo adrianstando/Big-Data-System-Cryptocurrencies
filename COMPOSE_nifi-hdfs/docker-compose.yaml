@@ -12,7 +12,7 @@ services:
     networks:
       big-data-net:
         ipv4_address: 10.0.0.2
-    volumes:
+    volumes: #Comment this while running the containers for the first time. Remove comment while running for the second, and future times. It adds a physical volume on our local machine, equivalent of running bash commands with -v FOLDER.
       - ${path}/hdfs/namenode:/hadoop/dfs/name
       - ${path}/hdfs/namenode_etc:/etc/hadoop
     env_file:
@@ -31,7 +31,7 @@ services:
       - hdfs-namenode
     ports:
       - 9864:9864
-    networks:
+    networks: #Add the static address, so the continer will be present in our network.
       big-data-net:
         ipv4_address: 10.0.0.3
     volumes:
@@ -39,7 +39,7 @@ services:
     env_file:
       - stack.env
     environment:
-      SERVICE_PRECONDITION: 'namenode:9870'
+      SERVICE_PRECONDITION: 'namenode:9870' # If it is not present, then the continer won't work.
     cap_add:
       - NET_ADMIN
 
@@ -95,11 +95,13 @@ services:
     networks:
       big-data-net:
         ipv4_address: 10.0.0.6
-    volumes:
+    volumes: #Comment this while running the containers for the first time. Remove comment while running for the second, and future times. It adds a physical volume on our local machine, equivalent of running bash commands with -v FOLDER.
       - ${path}/nifi:/opt/nifi/nifi-current/conf
       - ${path}/nifi:/opt/nifi/nifi-current/logs
       - ${path}/hdfs/namenode_etc:/hadoop_namenode_etc
-    environment:
+    env_file:
+      - stack.env
+    environment: #It provides the environmental variables for our service, equivalent of running bash commands with -e VARIABLE.
       - NIFI_WEB_HTTP_PORT=8080
       - news_api_key=${NEWS_IO_API_key}
     cap_add:

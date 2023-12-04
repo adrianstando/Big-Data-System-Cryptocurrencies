@@ -5,13 +5,13 @@ services:
     container_name: spark-master
     image: bitnami/spark:latest
     command: bin/spark-class org.apache.spark.deploy.master.Master
-    ports:
+    ports: #If you use it as localhost, then it maps the right port to the left one. If you use it from the outside, the port on the right side stays, and you should use the ipv4 address provided below.
       - 9090:8080
       - 7077:7077
     networks:
       big-data-net-spark:
         ipv4_address: 10.3.0.2
-    cap_add:
+    cap_add: #Enabling the container to manage the networking.
       - NET_ADMIN
       
   spark-worker-1:
@@ -72,7 +72,7 @@ services:
   pyspark:
     container_name: pyspark
     image: "jupyter/all-spark-notebook"
-    volumes:
+    volumes: #Maps the jupyter container folder on the right to local folder on the left.
       - ${path}/jupyter:/home/jovyan/work
     ports:
       - 8888:8888
@@ -83,9 +83,9 @@ services:
       - NET_ADMIN
     env_file:
       - stack.env
-    environment:
+    environment: # enables a sudo privilages in the container
       - GRANT_SUDO=yes
-    command: /bin/sh -c  "start-notebook.sh --user root --NotebookApp.token=''"
+    command: /bin/sh -c  "start-notebook.sh --user root --NotebookApp.token=''" # enables a sudo privilages in the container
 
 networks:
   big-data-net-spark:

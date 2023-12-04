@@ -1,27 +1,27 @@
 #!/bin/bash
 
 install_apt() {
-  container_name=$1
-  tailscale_ip=$2
-  subnet_address=$3
-  echo "step 1"
-  docker exec -it -u 0 "$container_name" sh -c "apt-get update -y"
-  echo "step 2"
-  docker exec -it -u 0 "$container_name" sh -c "apt-get install iproute2 -y"
+	container_name=$1
+	tailscale_ip=$2
+	subnet_address=$3
+	echo "step 1"
+	docker exec -it -u 0 "$container_name" sh -c "apt-get update -y"
+	echo "step 2"
+	docker exec -it -u 0 "$container_name" sh -c "apt-get install iproute2 -y"
 }
 
 # Function to add route for each container
 add_route() {
-  container_name=$1
-  tailscale_ip=$2
-  subnet_address=$3
-  echo $container_name
-  echo $tailscale_ip
-  echo $subnet_address
-  echo "step 3"
-  docker exec -it -u 0 "$container_name" sh -c "ip route add $subnet_address via $tailscale_ip"
-  echo "step 4"
-  docker exec -it -u 0 "$container_name" sh -c "ip route add 100.64.0.0/20 via $tailscale_ip"
+	container_name=$1
+	tailscale_ip=$2
+	subnet_address=$3
+	echo $container_name
+	echo $tailscale_ip
+	echo $subnet_address
+	echo "step 3"
+	docker exec -it -u 0 "$container_name" sh -c "ip route add $subnet_address via $tailscale_ip"
+	echo "step 4"
+	docker exec -it -u 0 "$container_name" sh -c "ip route add 100.64.0.0/20 via $tailscale_ip"
 }
 
 # Extract container names from docker-compose file, excluding those starting with "tailscale"
@@ -36,8 +36,8 @@ echo ${containers}
 
 # Loop through each container and add route
 for container in $containers; do
-  install_apt "$container" "$tailscale_container_ip" "$subnet"
-  for subnet in ${subnet_addresses[*]}; do
-    add_route "$container" "$tailscale_container_ip" "$subnet"
-  done
+	install_apt "$container" "$tailscale_container_ip" "$subnet"
+	for subnet in ${subnet_addresses[*]}; do
+		add_route "$container" "$tailscale_container_ip" "$subnet"
+	done
 done

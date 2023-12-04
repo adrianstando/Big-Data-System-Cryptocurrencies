@@ -10,8 +10,6 @@ services:
     environment:
       HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore/metastore"
       SERVICE_PRECONDITION: "hive-metastore:9083"
-    #depends_on:
-    #  - hive-metastore
     networks:
       big-data-net-hive-hbase:
         ipv4_address: 10.4.0.2
@@ -28,8 +26,6 @@ services:
     command: /opt/hive/bin/hive --service metastore
     environment:
       SERVICE_PRECONDITION: "10.0.0.2:9870 10.0.0.3:9864 hive-metastore-postgresql:5432"
-    #depends_on:
-    #  - hive-metastore-postgresql
     networks:
       big-data-net-hive-hbase:
         ipv4_address: 10.4.0.3
@@ -48,8 +44,6 @@ services:
         ipv4_address: 10.4.0.4
     cap_add:
       - NET_ADMIN
-    #depends_on:
-    #  - datanode
 
   hbase:
     image: bde2020/hbase-standalone:1.0.0-hbase1.2.6
@@ -87,11 +81,11 @@ services:
     networks:
       big-data-net-hive-hbase:
         ipv4_address: 10.4.0.6
+    env_file:
+      - stack.env
     volumes:
       - /dev/net/tun:/dev/net/tun
       - ${path}/tailscale:/var/lib
-    env_file:
-      - stack.env
     environment:
       - TS_ROUTES=10.4.0.0/16
       - TS_HOSTNAME=hive-hbase
