@@ -43,22 +43,6 @@ If the variables are set, you can run the following script to start all componen
 ./start.sh
 ```
 
-### Filling the route table
-
-Execute the following command to configure all ip-routes between different subnets, while all services are running.
-
-```
-./start_network.sh
-```
-
-The script above walks through each `COMPOSE_*` directory, then gets into each container, where it updates the `apt-get`, and then installs the `iproute2` package. After this set up it creates the connections between the container and all other subnets, via the tailscale network.
-
-If it it doesn't work properly, or if you use the distributed version you can run a legacy version in each `COMPOSE_*` directory.
-
-```
-./network.sh
-```
-
 #### Stopping containers
 
 In order to stop all containers running on a singular machine execute:
@@ -81,14 +65,53 @@ Nodemanager: http://localhost:8042/node or http://10.0.0.5:8042/node
 
 NIFI: http://localhost:8080/nifi/ or http://10.0.0.6:8080/nifi/
 
-Spark Master: http://localhost:9090 or http://10.3.0.2:8080
+Spark Master: http://localhost:9090 or http://10.0.0.21:8080
 
-Spark Worker 1: http://10.3.0.3:8081
+Spark Worker 1: http://10.0.0.22:8081
 
-Spark Worker 2: http://10.3.0.4:8081
+Spark Worker 2: http://10.0.0.23:8081
 
-Jupyter with PySpark: http://10.3.0.6:8888
+Jupyter with PySpark: http://10.0.0.24:8888
+
+## Containers
+
+* big-data-net:              10.0.0.0/16
+* hdfs-namenode:             10.0.0.2:9870
+* hdfs-datanode:             10.0.0.3:9864
+* hdfs-resourcemanager:      10.0.0.4:8088
+* hdfs-nodemanager:          10.0.0.5:8042
+* nifi:                      10.0.0.6:8080
+* tailscale_nifi:            10.0.0.7
+* news-scrapper:             10.0.0.8:(8012:80)
+* kafka0:                    10.0.0.10:(9094:9092)
+* kafka1:                    10.0.0.11:(9095:9092)
+* spark-master:              10.0.0.20:(9090:8080) or 7077
+* spark-worker-1:            10.0.0.21
+* spark-worker-2:            10.0.0.22
+* jupyter:                   10.0.0.23:8888
+* hive-server:               10.0.0.30:10000
+* hive-metastore             10.0.0.31:9083
+* hive-metastore-postgresql: 10.0.0.32
+* hbase:                     10.0.0.33:16000 or 16010 or 16020 or 16030 or 2888 or 3888 or 2181
 
 ## Additional data
 
 The `templates` file includes a nifi templates used in our project.
+
+# Not applicable anymore
+
+### Filling the route table
+
+Execute the following command to configure all ip-routes between different subnets, while all services are running.
+
+```
+./start_network.sh
+```
+
+The script above walks through each `COMPOSE_*` directory, then gets into each container, where it updates the `apt-get`, and then installs the `iproute2` package. After this set up it creates the connections between the container and all other subnets, via the tailscale network.
+
+If it it doesn't work properly, or if you use the distributed version you can run a legacy version in each `COMPOSE_*` directory.
+
+```
+./network.sh
+```

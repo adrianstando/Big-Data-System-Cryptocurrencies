@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.5'
 
 services:
   spark-master:
@@ -6,11 +6,14 @@ services:
     image: bitnami/spark:latest
     command: bin/spark-class org.apache.spark.deploy.master.Master
     ports: #If you use it as localhost, then it maps the right port to the left one. If you use it from the outside, the port on the right side stays, and you should use the ipv4 address provided below.
-      - 9090:8080
-      - 7077:7077
+      - "9090:8080"
+      - "7077:7077"
+    expose:
+      - "9090:8080"
+      - "7077:7077"
     networks:
-      big-data-net-spark:
-        ipv4_address: 10.3.0.2
+      big-data-net:
+        ipv4_address: 10.0.0.20
     cap_add: #Enabling the container to manage the networking.
       - NET_ADMIN
       
@@ -23,11 +26,11 @@ services:
     environment:
       SPARK_MODE: worker
       SPARK_WORKER_CORES: 2
-      SPARK_WORKER_MEMORY: 2g
+      SPARK_WORKER_MEMORY: 4g
       SPARK_MASTER_URL: spark://spark-master:7077
     networks:
-      big-data-net-spark:
-        ipv4_address: 10.3.0.3
+      big-data-net:
+        ipv4_address: 10.0.0.21
     cap_add:
       - NET_ADMIN
       
@@ -40,45 +43,25 @@ services:
     environment:
       SPARK_MODE: worker
       SPARK_WORKER_CORES: 2
-      SPARK_WORKER_MEMORY: 2g
+      SPARK_WORKER_MEMORY: 4g
       SPARK_MASTER_URL: spark://spark-master:7077
     networks:
-      big-data-net-spark:
-        ipv4_address: 10.3.0.4
+      big-data-net:
+        ipv4_address: 10.0.0.22
     cap_add:
       - NET_ADMIN
       
-  tailscale_spark:
-    image: tailscale/tailscale:stable
-    container_name: tailscale_spark
-    hostname: tailscale
-    restart: unless-stopped
-    privileged: true
-    cap_add:
-      - NET_ADMIN
-      - SYS_ADMIN
-    networks:
-      big-data-net-spark:
-        ipv4_address: 10.3.0.5
-    volumes:
-      - /dev/net/tun:/dev/net/tun
-      - ${path}/tailscale:/var/lib
-    env_file:
-      - stack.env
-    environment:
-      - TS_ROUTES=10.3.0.0/16
-      - TS_HOSTNAME=spark
  
-  pyspark:
-    container_name: pyspark
+  jupyter:
+    container_name: jupyter
     image: "jupyter/all-spark-notebook"
     volumes: #Maps the jupyter container folder on the right to local folder on the left.
       - ${path}/jupyter:/home/jovyan/work
     ports:
       - 8888:8888
     networks:
-      big-data-net-spark:
-        ipv4_address: 10.3.0.6
+      big-data-net:
+        ipv4_address: 10.0.0.23
     cap_add:
       - NET_ADMIN
     env_file:
@@ -88,10 +71,11 @@ services:
     command: /bin/sh -c  "start-notebook.sh --user root --NotebookApp.token=''" # enables a sudo privilages in the container
 
 networks:
-  big-data-net-spark:
-    name: big-data-net-spark
+  big-data-net:
+    name: big-data-net
     driver: bridge
     ipam:
       config:
-        - subnet: 10.3.0.0/16
+        - subnet: 10.0.0.0/16
+    external: true
 

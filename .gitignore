@@ -8,12 +8,13 @@ COMPOSE_nifi-hdfs/hdfs/datanode
 !COMPOSE_nifi-hdfs/hdfs/datanode/.gitkeep
 COMPOSE_nifi/nifi
 !COMPOSE_nifi/nifi/.gitkeep
-**/__pycache__/
+**/__pycache__
 
-COMPOSE_kafka_cluster/kafka_0_data
-!COMPOSE_kafka_cluster/kafka_0_data/.gitkeep
-COMPOSE_kafka_cluster/kafka_1_data
-!COMPOSE_kafka_cluster/kafka_1_data/.gitkeep
+COMPOSE_kafka-cluster/kafka0_data/data
+COMPOSE_kafka-cluster/kafka0_data
+COMPOSE_kafka-cluster/kafka1_data/data
+COMPOSE_kafka-cluster/kafka1_data
+COMPOSE_kafka-cluster
 
-COMPOSE_hbase-hive/hive_server
-COMPOSE_hbase-hive/metastore-postgresql
+COMPOSE_hbase-hive/hive_server/
+COMPOSE_hbase-hive/metastore-postgresql/
