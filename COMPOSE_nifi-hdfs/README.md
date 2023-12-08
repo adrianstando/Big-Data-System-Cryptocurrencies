@@ -1,5 +1,9 @@
 # NiFi - HDFS
 
+HDFS Version: 3.2.1
+
+NiFi Version: 1.23.2
+
 ## IMPORTANT
 
 While running for the first time, the following steps had to be done:

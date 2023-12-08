@@ -2,18 +2,35 @@
 
 ## Spark
 
-It is designed based on the article (https://medium.com/@mehmood9501/using-apache-spark-docker-containers-to-run-pyspark-programs-using-spark-submit-afd6da480e0f).
+Spark version 3.0.0
 
-We have version 3.5.0
-Scala: 2.12.18 OpenJDK 64-Bit Server VM, 17.0.9
+### Previous:
+
+Spark version 3.2.4
+Scala version 2.12.15, OpenJDK 64-Bit Server VM, 11.0.21
+
+Spark version 3.5.0
+Scala version 2.12.18, OpenJDK 64-Bit Server VM, 17.0.9
 
 ### Test example
 
-Execute the following commands while being in this folder:
+Copy from PC to spark-master:
+
+```
+docker cp -L your_program.py spark-master:spark/anyfilename.py
+```
+
+Get to folder spark and execute:
+
+```
+/spark/bin/spark-submit anyfilename.py
+```
+
+#### Legacy
 
 ```
 docker cp -L your_program.py spark-master:/opt/bitnami/spark/anyfilename.py
-docker-compose exec spark-master spark-submit --master spark://10.3.0.2:7077 anyfilename.py
+docker-compose exec spark-master spark-submit --master spark://10.30.0.20:7077 anyfilename.py
 ```
 
 ### Check version
@@ -21,7 +38,7 @@ docker-compose exec spark-master spark-submit --master spark://10.3.0.2:7077 any
 ```
 docker-compose exec spark-master spark-submit --version
 ```
-## Jupyter Notebook
+## Jupyter Notebook - finally we dont use it
 
 We use the Jupyter Notebook to develop the prototypes of the final solutions implemented in Apache Spark.
 

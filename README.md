@@ -12,12 +12,13 @@ For now, our solution involves the following components:
 
 * Docker,
 * Tailscale,
-* Apache Hadoop,
-* Apache NiFi,
-* Apache Kafka,
-* Apache Spark,
-* Apache HBase,
-* Apache Hive.
+* Portainer,
+* Apache Hadoop 3.2.1,
+* Apache NiFi 1.23.2,
+* Apache Kafka 3.4,
+* Apache Spark 3.0.0,
+* Apache HBase 1.2.6,
+* Apache Hive 2.3.2.
 
 ## How to run the project?
 
@@ -65,13 +66,15 @@ Nodemanager: http://localhost:8042/node or http://10.0.0.5:8042/node
 
 NIFI: http://localhost:8080/nifi/ or http://10.0.0.6:8080/nifi/
 
-Spark Master: http://localhost:9090 or http://10.0.0.21:8080
+Spark Master: http://localhost:9090 or http://10.0.0.20:8080
 
-Spark Worker 1: http://10.0.0.22:8081
+Spark Worker 1: http://10.0.0.21:8081
 
-Spark Worker 2: http://10.0.0.23:8081
+Spark Worker 2: http://10.0.0.22:8081
 
-Jupyter with PySpark: http://10.0.0.24:8888
+Jupyter with PySpark: http://10.0.0.23:8888
+
+Portainer: http://10.0.0.40:9000 (login: admin password: BigData123BigData123)
 
 ## Containers
 
@@ -87,16 +90,21 @@ Jupyter with PySpark: http://10.0.0.24:8888
 * kafka1:                    10.0.0.11:(9095:9092)
 * spark-master:              10.0.0.20:(9090:8080) or 7077
 * spark-worker-1:            10.0.0.21
-* spark-worker-2:            10.0.0.22
 * jupyter:                   10.0.0.23:8888
+* jupyter_notebook:          10.0.0.24:(8889:8888)
 * hive-server:               10.0.0.30:10000
 * hive-metastore             10.0.0.31:9083
 * hive-metastore-postgresql: 10.0.0.32
 * hbase:                     10.0.0.33:16000 or 16010 or 16020 or 16030 or 2888 or 3888 or 2181
+* portainer:                 10.0.0.40:9000
 
 ## Additional data
 
-The `templates` file includes a nifi templates used in our project.
+The `templates` file includes a NiFi templates used in our project. If you want to run it, copy the template to your NiFi. Probably you will additionally have to enable lots of services in the NiFi by hand, as we cannot do it automatically.
+
+## Development stories
+
+In the `Encountered issues.md` file you can read about the problems which occured during the project development, and get the insights into this process.
 
 # Not applicable anymore
 
