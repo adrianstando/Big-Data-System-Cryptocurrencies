@@ -39,7 +39,7 @@ While running for the first time, the following steps had to be done:
 4. Run
 
     ```
-    docker-compose down
+    docker-compose --env-file stack.env down
     ```
 
 5. Uncomment lines which were commented in 1.

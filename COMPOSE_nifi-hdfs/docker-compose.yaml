@@ -8,7 +8,9 @@ services:
     restart: unless-stopped
     ports:
       - 9870:9870
-      # - '9001:9000'
+      - 8020:8020
+      - 9001:9000 #It is for connecting from Spark
+      #- '50070:50070'
     networks:
       big-data-net:
         ipv4_address: 10.0.0.2
@@ -53,6 +55,7 @@ services:
       - hdfs-datanode
     ports:
       - 8088:8088
+      #- 50075:50075
     networks:
       big-data-net:
         ipv4_address: 10.0.0.4

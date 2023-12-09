@@ -4,7 +4,7 @@
 
 Spark version 3.0.0
 
-### Previous:
+### Previous attempts:
 
 Spark version 3.2.4
 Scala version 2.12.15, OpenJDK 64-Bit Server VM, 11.0.21
@@ -14,7 +14,7 @@ Scala version 2.12.18, OpenJDK 64-Bit Server VM, 17.0.9
 
 ### Test example
 
-Copy from PC to spark-master:
+If you run everything on the local machine, copy from PC to spark-master:
 
 ```
 docker cp -L your_program.py spark-master:spark/anyfilename.py
@@ -38,7 +38,14 @@ docker-compose exec spark-master spark-submit --master spark://10.30.0.20:7077 a
 ```
 docker-compose exec spark-master spark-submit --version
 ```
-## Jupyter Notebook - finally we dont use it
+
+## How to work with Spark?
+
+If you work on the machine where all services are hosted, you can submit the scripts as shown in the Example. Otherwise you have to work with Portainer.
+
+TO DO
+
+## Jupyter Notebook - finally we used it only for Kafka development
 
 We use the Jupyter Notebook to develop the prototypes of the final solutions implemented in Apache Spark.
 

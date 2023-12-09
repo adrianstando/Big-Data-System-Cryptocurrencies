@@ -56,8 +56,6 @@ services:
     cap_add:
       - NET_ADMIN
   
-
-
 volumes:
   kafka0_data:
     driver: local

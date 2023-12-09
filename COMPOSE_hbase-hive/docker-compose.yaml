@@ -9,7 +9,7 @@ services:
       - ./stack.env
     environment:
       HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore/metastore"
-      SERVICE_PRECONDITION: "hive-metastore:9083"
+      SERVICE_PRECONDITION: "10.0.0.31:9083"
     networks:
       big-data-net:
         ipv4_address: 10.0.0.30
@@ -25,7 +25,7 @@ services:
       - ./stack.env
     command: /opt/hive/bin/hive --service metastore
     environment:
-      SERVICE_PRECONDITION: "10.0.0.2:9870 10.0.0.3:9864 hive-metastore-postgresql:5432"
+      SERVICE_PRECONDITION: "10.0.0.2:9870 10.0.0.3:9864 10.0.0.32:5432"
     networks:
       big-data-net:
         ipv4_address: 10.0.0.31

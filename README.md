@@ -13,12 +13,12 @@ For now, our solution involves the following components:
 * Docker,
 * Tailscale,
 * Portainer,
-* Apache Hadoop 3.2.1,
+* Apache Hadoop 3.2.1 (namenode 2.0.0, java 8),
 * Apache NiFi 1.23.2,
 * Apache Kafka 3.4,
 * Apache Spark 3.0.0,
 * Apache HBase 1.2.6,
-* Apache Hive 2.3.2.
+* Apache Hive 2.3.2. (metastore-postgresql 2.3.0)
 
 ## How to run the project?
 
@@ -44,13 +44,21 @@ If the variables are set, you can run the following script to start all componen
 ./start.sh
 ```
 
-#### Stopping containers
+### Stopping containers
 
 In order to stop all containers running on a singular machine execute:
 
 ```
 ./stop.sh
 ```
+
+### Tailscale and Portainer
+
+To gain a remote access to the services, you have to download Tailscale (https://tailscale.com/download/), create an account there, and log in with whe same account on multiple devices which will be present in our Tailscale network. It assures, that you are able to connect (ping), all containers in the big-data-net.
+
+Additionally, to remotely access the console of all containers you should use the Portainer, which is a web UI that allows you to access all the containers remotely. Firstly, you have to run it on the machine where the project is hosted, and set username and password. Later, Portainer will only ask you to log inwith provided data.
+
+Portainer service link: http://10.0.0.34:9000
 
 ## Access
 
@@ -78,8 +86,10 @@ Portainer: http://10.0.0.34:9000 (login: admin password: BigData123BigData123)
 
 ## Containers
 
+If we provide one port it means that we have assigned the same port on localhost, e.g. 9870 equals 9870:9870. If we are mapping different ports, then we provide info like this (9001:9000). If single container exposes more ports, then we provide them after keyword `or`.
+
 * big-data-net:              10.0.0.0/16
-* hdfs-namenode:             10.0.0.2:9870
+* hdfs-namenode:             10.0.0.2:9870 or 8020 or (9001:9000 - Spark)
 * hdfs-datanode:             10.0.0.3:9864
 * hdfs-resourcemanager:      10.0.0.4:8088
 * hdfs-nodemanager:          10.0.0.5:8042
@@ -108,7 +118,7 @@ In the `Encountered issues.md` file you can read about the problems which occure
 
 # Not applicable anymore
 
-### Filling the route table
+## Filling the route table
 
 Execute the following command to configure all ip-routes between different subnets, while all services are running.
 
