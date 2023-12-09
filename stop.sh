@@ -15,10 +15,8 @@ for directory in ${COMPOSE_folders[*]}; do
     cd "$dir_name"
 
     # Stop and remove containers defined in docker-compose.yml
-    docker-compose down
+    docker-compose --env-file stack.env down
 
     # Change back to the parent directory
     cd "$parent_directory"
 done
-
-docker-compose down

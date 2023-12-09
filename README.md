@@ -74,7 +74,7 @@ Spark Worker 2: http://10.0.0.22:8081
 
 Jupyter with PySpark: http://10.0.0.23:8888
 
-Portainer: http://10.0.0.40:9000 (login: admin password: BigData123BigData123)
+Portainer: http://10.0.0.34:9000 (login: admin password: BigData123BigData123)
 
 ## Containers
 
@@ -96,7 +96,7 @@ Portainer: http://10.0.0.40:9000 (login: admin password: BigData123BigData123)
 * hive-metastore             10.0.0.31:9083
 * hive-metastore-postgresql: 10.0.0.32
 * hbase:                     10.0.0.33:16000 or 16010 or 16020 or 16030 or 2888 or 3888 or 2181
-* portainer:                 10.0.0.40:9000
+* portainer:                 10.0.0.34:9000
 
 ## Additional data
 

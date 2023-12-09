@@ -21,5 +21,3 @@ for directory in ${COMPOSE_folders[*]}; do
     # Change back to the parent directory
     cd "$parent_directory"
 done
-
-docker-compose up -d
