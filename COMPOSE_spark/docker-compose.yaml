@@ -17,6 +17,7 @@ services:
       - NET_ADMIN
     volumes: #Maps the container folder on the right to local folder on the left.
       - ${path}/scripts:/home
+      - ${path}/conf:/spark/conf/
 
   spark-worker-1:
     image: bde2020/spark-worker:3.0.0-hadoop3.2

@@ -4,7 +4,7 @@
 parent_directory=$(pwd)
 
 
-COMPOSE_folders=("COMPOSE_nifi-hdfs" "COMPOSE_kafka-cluster" "COMPOSE_spark" "COMPOSE_hbase-hive")
+COMPOSE_folders=("COMPOSE_nifi-hdfs" "COMPOSE_kafka-cluster" "COMPOSE_spark" "COMPOSE_hbase-hive" "COMPOSE_cassandra")
 
 echo ${COMPOSE_folders[*]}
 

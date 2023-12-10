@@ -46,7 +46,7 @@ services:
       - NET_ADMIN
 
   hbase:
-    image: bde2020/hbase-standalone:1.0.0-hbase1.2.6
+    image: coomia/hbase2.2:0.1
     container_name: hbase
     volumes:
       - hbase_data:/hbase_data
@@ -59,6 +59,7 @@ services:
       - 2888:2888
       - 3888:3888
       - 2181:2181
+      - 9091:9090
     environment:
       SERVICE_PRECONDITION: "10.0.0.2:9870 10.0.0.3:9864"
     networks:

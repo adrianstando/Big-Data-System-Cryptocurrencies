@@ -55,3 +55,13 @@
 * During the changes for Hive to work, we introduced a major bug which made our Hadoop services unhealthy. We accidentally added unwanted SERVICE_PRECONDITION, which made the services unavailable.
 
 * We faced a problem while connecting Spark to nodemanager, and it came out that we used wrong port for it 9870 instead of 9000.
+
+* Another problems occured with connecting to Hive with PySpark, as by default it connected to spark-warehouse, and it seemed to not notice out Hive-metastore, even though we exlicitly pointed out where we want to connect. After 2 or 3 hours we finally found out that we had to copy hive-site.xml configuration file to Spark to enable connecting to proper Hive service. Learning on our mistakes, this time we configured hbase the same way upfront.
+
+## 10.12.23
+
+* We faced major issues with connecting to HBase from PySpark or Spark. We tried to find proper connectors in Maeven reposityory, or some automatic methods of determining those from GitHub. The abundance of terribly documented solutions makes it nearly impossible to find proper files. Circa 3 hours lost.
+
+* Another approach to overcome these issues was installing Happybase on spark-master, however we run into the abundance of setup issues, which unabled us getting positive results. 1 hour lost.
+
+* Finally, we switched to Cassandra, instead of HBase, which ended up being perfectly fit for connecting to Spark, and we didn't face any issues. Half an hour.

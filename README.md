@@ -17,8 +17,9 @@ For now, our solution involves the following components:
 * Apache NiFi 1.23.2,
 * Apache Kafka 3.4,
 * Apache Spark 3.0.0,
-* Apache HBase 1.2.6,
-* Apache Hive 2.3.2. (metastore-postgresql 2.3.0)
+* Apache HBase 2.2.6 (previously 1.2.6),
+* Apache Hive 2.3.2 (metastore-postgresql 2.3.0),
+* Apache Cassandra 4.0.11
 
 ## How to run the project?
 
@@ -28,6 +29,8 @@ You need Docker (Linux) or Docker-Desktop (Windows) installed.
 
 You need WSL on Windows.
 
+You need at least 10GB of unused RAM memory for the sytem.
+
 You need Tailscale (Linux) or Tailscale add-in (Windows) installed.
 
 You need proper tokens to the APIs mentioned somewhere in the main folders READMEs.
@@ -35,6 +38,14 @@ You need proper tokens to the APIs mentioned somewhere in the main folders READM
 ### First-time set-up
 
 Each folder that start with `COMPOSE_*` contains `docker-compose.yaml` file to run different parts of the system. Study `README.md` files in each directory to see whether additional environment variables have to be set.
+
+Additionally you have to configure hive, during the first runs.
+
+```
+docker cp hive-server:/opt/hive/conf/hive-site.xml .
+docker cp ./hive-site.xml spark-master:/spark/conf/
+rm ./hive-site.xml
+```
 
 ### Starting containers
 
@@ -60,7 +71,32 @@ Additionally, to remotely access the console of all containers you should use th
 
 Portainer service link: http://10.0.0.34:9000
 
-## Access
+## Containers
+
+If we provide one port it means that we have assigned the same port on localhost, e.g. 9870 equals 9870:9870. If we are mapping different ports, then we provide info like this (9001:9000). If single container exposes more ports, then we provide them after keyword `or`.
+
+* big-data-net:              10.0.0.0/16
+* hdfs-namenode:             10.0.0.2:9870 or 8020 or (9001:9000 - Spark)
+* hdfs-datanode:             10.0.0.3:9864
+* hdfs-resourcemanager:      10.0.0.4:8088
+* hdfs-nodemanager:          10.0.0.5:8042
+* nifi:                      10.0.0.6:8080
+* tailscale_nifi:            10.0.0.7
+* news-scrapper:             10.0.0.8:(8012:80)
+* kafka0:                    10.0.0.10:(9094:9092)
+* kafka1:                    10.0.0.11:(9095:9092)
+* spark-master:              10.0.0.20:(9090:8080) or 7077
+* spark-worker-1:            10.0.0.21
+* jupyter:                   10.0.0.23:8888
+* jupyter_notebook:          10.0.0.24:(8889:8888)
+* hive-server:               10.0.0.30:10000
+* hive-metastore             10.0.0.31:9083
+* hive-metastore-postgresql: 10.0.0.32
+* hbase:                     10.0.0.33:16000 or 16010 or 16020 or 16030 or 2888 or 3888 or 2181 or 9091:9090
+* portainer:                 10.0.0.34:9000
+* cassandra:                 10.0.0.40:7000 or 9042
+
+## Web-Access
 
 In order to get to services via internet explorers use following links (locally or globally):
 
@@ -84,30 +120,6 @@ Jupyter with PySpark: http://10.0.0.23:8888
 
 Portainer: http://10.0.0.34:9000 (login: admin password: BigData123BigData123)
 
-## Containers
-
-If we provide one port it means that we have assigned the same port on localhost, e.g. 9870 equals 9870:9870. If we are mapping different ports, then we provide info like this (9001:9000). If single container exposes more ports, then we provide them after keyword `or`.
-
-* big-data-net:              10.0.0.0/16
-* hdfs-namenode:             10.0.0.2:9870 or 8020 or (9001:9000 - Spark)
-* hdfs-datanode:             10.0.0.3:9864
-* hdfs-resourcemanager:      10.0.0.4:8088
-* hdfs-nodemanager:          10.0.0.5:8042
-* nifi:                      10.0.0.6:8080
-* tailscale_nifi:            10.0.0.7
-* news-scrapper:             10.0.0.8:(8012:80)
-* kafka0:                    10.0.0.10:(9094:9092)
-* kafka1:                    10.0.0.11:(9095:9092)
-* spark-master:              10.0.0.20:(9090:8080) or 7077
-* spark-worker-1:            10.0.0.21
-* jupyter:                   10.0.0.23:8888
-* jupyter_notebook:          10.0.0.24:(8889:8888)
-* hive-server:               10.0.0.30:10000
-* hive-metastore             10.0.0.31:9083
-* hive-metastore-postgresql: 10.0.0.32
-* hbase:                     10.0.0.33:16000 or 16010 or 16020 or 16030 or 2888 or 3888 or 2181
-* portainer:                 10.0.0.34:9000
-
 ## Additional data
 
 The `templates` file includes a NiFi templates used in our project. If you want to run it, copy the template to your NiFi. Probably you will additionally have to enable lots of services in the NiFi by hand, as we cannot do it automatically.
@@ -117,6 +129,8 @@ The `templates` file includes a NiFi templates used in our project. If you want 
 In the `Encountered issues.md` file you can read about the problems which occured during the project development, and get the insights into this process.
 
 # Not applicable anymore
+
+This section provides additional information about the solutions, which were eventually discarded during the project development process.
 
 ## Filling the route table
 
@@ -132,4 +146,30 @@ If it it doesn't work properly, or if you use the distributed version you can ru
 
 ```
 ./network.sh
+```
+
+## HBase
+
+Eventually, we resigned from using HBase, and decided to use cassanda, but you can try you luck with executing following commands, and maybe it will work.
+
+```
+docker cp hbase:/opt/hbase-2.2.6/lib/hbase-client-2.2.6.jar .
+docker cp ./hbase-client-2.2.6.jar spark-master:/spark/conf/
+rm ./hbase-client-2.2.6.jar
+
+docker cp hbase:/opt/hbase-2.2.6/conf/hbase-site.xml .
+docker cp ./hbase-site.xml spark-master:/spark/conf/
+rm ./hbase-site.xml
+```
+
+### Old hbase
+
+```
+docker cp hbase:/opt/hbase-1.2.6/lib/hbase-client-1.2.6.jar .
+docker cp ./hbase-client-1.2.6.jar spark-master:/spark/conf/
+rm ./hbase-client-1.2.6.jar
+
+docker cp hbase:/etc/hbase-1.2.6/hbase-site.xml .
+docker cp ./hbase-site.xml spark-master:/spark/conf/
+rm ./hbase-site.xml
 ```

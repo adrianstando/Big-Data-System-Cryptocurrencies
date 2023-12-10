@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  cassandra:
+    container_name: cassandra
+    image: docker.io/bitnami/cassandra:4.0
+    ports:
+      - '7000:7000'
+      - '9042:9042'
+    volumes:
+      - ${path}/cassandra_data:/bitnami
+    environment:
+      - CASSANDRA_SEEDS=cassandra
+      - CASSANDRA_PASSWORD_SEEDER=yes
+      - CASSANDRA_PASSWORD=cassandra
+    networks:
+      big-data-net:
+        ipv4_address: 10.0.0.40
+    env_file:
+      - ./stack.env
+    cap_add:
+      - NET_ADMIN
+volumes:
+  cassandra_data:
+    driver: local 
+
+networks:
+  big-data-net:
+    name: big-data-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16
+    external: true

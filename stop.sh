@@ -3,7 +3,7 @@
 # Get the current parent directory
 parent_directory=$(pwd)
 
-COMPOSE_folders=("COMPOSE_hbase-hive" "COMPOSE_spark" "COMPOSE_kafka-cluster" "COMPOSE_nifi-hdfs")
+COMPOSE_folders=("COMPOSE_cassandra" "COMPOSE_hbase-hive" "COMPOSE_spark" "COMPOSE_kafka-cluster" "COMPOSE_nifi-hdfs")
 
 echo ${COMPOSE_folders[*]}
 
