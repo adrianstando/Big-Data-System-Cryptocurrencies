@@ -1,21 +1,57 @@
-# README
+# Spark
 
-## Spark
+Spark version 3.0.0
 
-It is designed based on the article (https://medium.com/@mehmood9501/using-apache-spark-docker-containers-to-run-pyspark-programs-using-spark-submit-afd6da480e0f).
+## Previous attempts:
 
-**WARNING** This time we have to run it via following command, as we have no stack.env file: docker-compose up -d
+Spark version 3.2.4
+Scala version 2.12.15, OpenJDK 64-Bit Server VM, 11.0.21
 
-### Test example
+Spark version 3.5.0
+Scala version 2.12.18, OpenJDK 64-Bit Server VM, 17.0.9
 
-docker cp -L your_program.py compose_spark-spark-master-1:/opt/bitnami/spark/anyfilename.py
+## Test example
 
-*Execute:*
+If you run everything on the local machine, copy from PC to spark-master:
 
-docker logs compose_spark-spark-master-1
+```
+docker cp -L your_program.py spark-master:spark/anyfilename.py
+```
 
-Find sth like Starting Spark master at: *spark://172.X.0.2:7077*
+Get to folder spark and execute:
 
-docker-compose exec spark-master spark-submit --master spark://172.24.0.2:7077 anyfilename.py
+```
+/spark/bin/spark-submit anyfilename.py
+```
 
-**WARNING** It finally works, yay!
+### Legacy
+
+```
+docker cp -L your_program.py spark-master:/opt/bitnami/spark/anyfilename.py
+docker-compose exec spark-master spark-submit --master spark://10.30.0.20:7077 anyfilename.py
+```
+
+### Check version
+
+To check spark, and scala version, run the following command in COMPOSE_spark folder:
+
+```
+docker-compose exec spark-master spark-submit --version
+```
+
+## How to work with Spark?
+
+If you work on the machine where all services are hosted, you can submit the scripts as shown in the Example. Otherwise you have to work with Portainer.
+
+TODO
+
+## Jupyter Notebook - finally we don't use it
+
+We use the Jupyter Notebook to develop the prototypes of the final solutions implemented in Apache Spark.
+
+We've managed to force our Jupyter to enable the user to gain *sudo* rights, removed the necessity to provide a token or password while running the service (crucial, as after the restart we lost those information), and assigned a proper local volume for saving the files, present in Jupyter's *work* directory.
+
+### How to use it
+
+To access the notebook you have to get into following link http://127.0.0.1:8888/lab or http://10.0.0.23:8888/lab
+

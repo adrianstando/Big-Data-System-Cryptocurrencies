@@ -3,8 +3,11 @@
 # Get the current parent directory
 parent_directory=$(pwd)
 
-# Loop through each subdirectory starting with the prefix 'COMPOSE_'
-for directory in COMPOSE_*/; do
+COMPOSE_folders=("COMPOSE_cassandra" "COMPOSE_hbase-hive" "COMPOSE_spark" "COMPOSE_kafka-cluster" "COMPOSE_nifi-hdfs")
+
+echo ${COMPOSE_folders[*]}
+
+for directory in ${COMPOSE_folders[*]}; do
     # Remove trailing slash to get the directory name
     dir_name="${directory%/}"
 
@@ -12,9 +15,8 @@ for directory in COMPOSE_*/; do
     cd "$dir_name"
 
     # Stop and remove containers defined in docker-compose.yml
-    docker-compose down
+    docker-compose --env-file stack.env down
 
     # Change back to the parent directory
     cd "$parent_directory"
 done
-

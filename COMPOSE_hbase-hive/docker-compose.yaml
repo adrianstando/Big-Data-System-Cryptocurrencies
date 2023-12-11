@@ -9,14 +9,14 @@ services:
       - ./stack.env
     environment:
       HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore/metastore"
-      SERVICE_PRECONDITION: "hive-metastore:9083"
-    #depends_on:
-    #  - hive-metastore
+      SERVICE_PRECONDITION: "10.0.0.31:9083"
     networks:
-      big-data-net-hive-hbase:
-        ipv4_address: 10.4.0.2
+      big-data-net:
+        ipv4_address: 10.0.0.30
     ports:
       - 10000:10000
+    cap_add:
+      - NET_ADMIN
 
   hive-metastore:
     image: bde2020/hive:2.3.2-postgresql-metastore
@@ -25,14 +25,14 @@ services:
       - ./stack.env
     command: /opt/hive/bin/hive --service metastore
     environment:
-      SERVICE_PRECONDITION: "10.0.0.2:9870 10.0.0.3:9864 hive-metastore-postgresql:5432"
-    #depends_on:
-    #  - hive-metastore-postgresql
+      SERVICE_PRECONDITION: "10.0.0.2:9870 10.0.0.3:9864 10.0.0.32:5432"
     networks:
-      big-data-net-hive-hbase:
-        ipv4_address: 10.4.0.3
+      big-data-net:
+        ipv4_address: 10.0.0.31
     ports:
       - 9083:9083
+    cap_add:
+      - NET_ADMIN
 
   hive-metastore-postgresql:
     image: bde2020/hive-metastore-postgresql:2.3.0
@@ -40,13 +40,13 @@ services:
     volumes:
       - ./metastore-postgresql/postgresql/data:/var/lib/postgresql/data
     networks:
-      big-data-net-hive-hbase:
-        ipv4_address: 10.4.0.4
-    #depends_on:
-    #  - datanode
+      big-data-net:
+        ipv4_address: 10.0.0.32
+    cap_add:
+      - NET_ADMIN
 
   hbase:
-    image: bde2020/hbase-standalone:1.0.0-hbase1.2.6
+    image: coomia/hbase2.2:0.1
     container_name: hbase
     volumes:
       - hbase_data:/hbase_data
@@ -59,43 +59,42 @@ services:
       - 2888:2888
       - 3888:3888
       - 2181:2181
+      - 9091:9090
     environment:
       SERVICE_PRECONDITION: "10.0.0.2:9870 10.0.0.3:9864"
     networks:
-      big-data-net-hive-hbase:
-        ipv4_address: 10.4.0.5
+      big-data-net:
+        ipv4_address: 10.0.0.33
     env_file:
       - ./stack.env
-
-  tailscale_hive-hbase:
-    image: tailscale/tailscale:stable
-    container_name: tailscale_hive-hbase
-    hostname: tailscale
-    restart: unless-stopped
-    privileged: true
     cap_add:
       - NET_ADMIN
-      - SYS_ADMIN
-    networks:
-      big-data-net-hive-hbase:
-        ipv4_address: 10.4.0.6
+
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:latest
+    ports:
+      - 9000:9000 # http
     volumes:
-      - /dev/net/tun:/dev/net/tun
-      - ${path}/tailscale:/var/lib
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${path}/portainer_data:/data
+    restart: unless-stopped
+    networks:
+      big-data-net:
+        ipv4_address: 10.0.0.34
     env_file:
-      - stack.env
-    environment:
-      - TS_ROUTES=10.4.0.0/16
-      - TS_HOSTNAME=hive-hbase
+      - ./stack.env
+      
 
 volumes:
   hbase_data:
   hbase_zookeeper_data:
 
 networks:
-  big-data-net-hive-hbase:
-    name: big-data-net-hive-hbase
+  big-data-net:
+    name: big-data-net
     driver: bridge
     ipam:
       config:
-        - subnet: 10.4.0.0/16
+        - subnet: 10.0.0.0/16
+    external: true

@@ -1,10 +1,14 @@
 # NiFi - HDFS
 
+HDFS Version: 3.2.1
+
+NiFi Version: 1.23.2
+
 ## IMPORTANT
 
 While running for the first time, the following steps had to be done:
 
-1. In docker-compose.yaml comment volumes in hdfs-namenode and nifi (lines 15-17 and 90-92).
+1. In docker-compose.yaml comment volumes in hdfs-namenode and nifi (lines 15-17 and 98-101).
 
 2. Run
 
@@ -12,7 +16,7 @@ While running for the first time, the following steps had to be done:
     docker-compose --env-file stack.env up -d
     ```
 
-3. When the contriners are running, run the following commands:
+3. When the containers are running, run the following commands:
 
     ```
     docker cp hdfs-namenode:/hadoop/dfs/name/ ./hdfs/namenode
@@ -26,12 +30,16 @@ While running for the first time, the following steps had to be done:
     docker cp nifi:/opt/nifi/nifi-current/conf/ ./nifi
     cp -r ./nifi/conf/* ./nifi/
     rm -rf ./nifi/conf
+	
+	docker cp nifi:/opt/nifi/nifi-current/logs/ ./nifi
+    cp -r ./nifi/logs/* ./nifi/
+    rm -rf ./nifi/logs
     ```
 
 4. Run
 
     ```
-    docker-compose down
+    docker-compose --env-file stack.env down
     ```
 
 5. Uncomment lines which were commented in 1.
@@ -41,10 +49,6 @@ While running for the first time, the following steps had to be done:
     ```
     docker-compose --env-file stack.env up -d
     ```
-
-## ATTENTION - NiFI
-
-Template for NiFi is in `template.xml` file. When running NiFi, please upload template and put it on the working area.
 
 ## Other comments:
 
@@ -63,3 +67,5 @@ In the `stack.env` file, set the following variables:
 * `API_KEY_NEWSAPI` - authentication key to News API
 
 * `path` - absolute path to the current directory (can be left as `.`)
+
+**WARNING** We do not provide those parameters, as we want to keep the privacy of our own tokens, so no-one will use up our limits. If you want to run the project, you have to get them yourself.
