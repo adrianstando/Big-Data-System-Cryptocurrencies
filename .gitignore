@@ -15,3 +15,18 @@ COMPOSE_kafka-cluster/kafka1_data/data
 
 COMPOSE_hbase-hive/hive_server/
 COMPOSE_hbase-hive/metastore-postgresql/
+
+COMPOSE_kafka-cluster/outputs/crypto_rates.csv/
+COMPOSE_kafka-cluster/outputs/cryptocompare.csv/
+COMPOSE_kafka-cluster/outputs/cryptopanic.csv/
+COMPOSE_kafka-cluster/outputs/news_io.csv/
+COMPOSE_kafka-cluster/outputs/newsapi.csv/
+
+outputs/crypto_rates.csv/
+outputs/cryptocompare.csv/
+outputs/cryptopanic.csv/
+outputs/news_io.csv/
+outputs/newsapi.csv/
+
+COMPOSE_kafka-cluster/kafka1_data/data/
+COMPOSE_kafka-cluster/kafka0_data/data/

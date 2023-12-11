@@ -60,7 +60,7 @@
 
 ## 10.12.23
 
-* We faced major issues with connecting to HBase from PySpark or Spark. We tried to find proper connectors in Maeven reposityory, or some automatic methods of determining those from GitHub. The abundance of terribly documented solutions makes it nearly impossible to find proper files. Circa 3 hours lost.
+* We faced major issues with connecting to HBase from PySpark or Spark. We tried to find proper connectors in Maeven repository, or some automatic methods of determining those from GitHub. The abundance of terribly documented solutions makes it nearly impossible to find proper files. Circa 3 hours lost.
 
 * Another approach to overcome these issues was installing Happybase on spark-master, however we run into the abundance of setup issues, which unabled us getting positive results. 1 hour lost.
 

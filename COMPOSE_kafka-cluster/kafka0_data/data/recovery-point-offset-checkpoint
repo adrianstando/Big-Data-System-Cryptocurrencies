@@ -2,8 +2,8 @@
 60
 __transaction_state 42 0
 __transaction_state 7 0
-crypto_rates 0 1823
-__consumer_offsets 27 0
+crypto_rates 0 33060
+__consumer_offsets 27 3
 __consumer_offsets 9 3
 __transaction_state 49 0
 __consumer_offsets 46 0
@@ -11,11 +11,11 @@ crypto 1 0
 __consumer_offsets 35 0
 scraped_news 1 2
 __transaction_state 2 0
-__consumer_offsets 23 0
+__consumer_offsets 23 3
 __transaction_state 13 13
 __consumer_offsets 49 0
 __transaction_state 0 4
-__consumer_offsets 16 0
+__consumer_offsets 16 3
 __consumer_offsets 28 0
 __transaction_state 37 0
 __consumer_offsets 31 0
@@ -38,13 +38,13 @@ __consumer_offsets 38 0
 __transaction_state 32 0
 rates_mofified 1 0
 __transaction_state 25 0
-crypto_rates 1 2253
-__consumer_offsets 19 3
-__consumer_offsets 11 3
+crypto_rates 1 34176
+__consumer_offsets 19 6
+__consumer_offsets 11 6
 __transaction_state 47 0
-__consumer_offsets 2 3
+__consumer_offsets 2 6
 __consumer_offsets 6 0
-__consumer_offsets 14 0
+__consumer_offsets 14 3
 topic_modified 0 2081
 __consumer_offsets 20 0
 __transaction_state 16 0
