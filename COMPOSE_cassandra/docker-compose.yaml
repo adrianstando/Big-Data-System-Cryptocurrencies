@@ -8,7 +8,7 @@ services:
       - '7000:7000'
       - '9042:9042'
     volumes:
-      - ${path}/cassandra_data:/bitnami
+      - ${path}/cassandra_data_2:/bitnami
     environment:
       - CASSANDRA_SEEDS=cassandra
       - CASSANDRA_PASSWORD_SEEDER=yes
@@ -20,9 +20,13 @@ services:
       - ./stack.env
     cap_add:
       - NET_ADMIN
+  
+  
 volumes:
   cassandra_data:
-    driver: local 
+    driver: local  
+  cassandra_data_2:
+    driver: local
 
 networks:
   big-data-net:

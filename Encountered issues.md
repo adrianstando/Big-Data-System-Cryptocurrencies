@@ -65,3 +65,17 @@
 * Another approach to overcome these issues was installing Happybase on spark-master, however we run into the abundance of setup issues, which unabled us getting positive results. 1 hour lost.
 
 * Finally, we switched to Cassandra, instead of HBase, which ended up being perfectly fit for connecting to Spark, and we didn't face any issues. Half an hour.
+
+## 17.12.23
+
+* While working with Spark (2 people running scripts) we killed Huberts PC and used all available RAM so he was not able restart processors and had to restart whole PC. The issues occur regularly, and are wasting lots of times.
+
+* Due to multiple errors with installing python packages such as numpy on Spark container, we had to change from bde2020 image to bitami, which works on different operating system (Alpine -> Bitnami). Firstly we tried multiple approaches, including recommended `apk add python3-dev`, however it destroyed pip, and we were not able to install it again.
+
+* Initially we intended to use a sentiment analysis model for whole texts, however it wieghted 0.5GB, which is too big for our containers, thus we decided to use smaller, one-sentence version, and aggregate the outcomes by assigning a mode of all sentences. It caused additional problems, as Spark 3.2 doesn't support this function, thus we had to design a workaround, which eventually worked out.
+
+* We spent whole day on working with streams, with symbolic results. We managed to introduce a data preprocessing and reasonable aggregations, however we still cannot join two streams.
+
+## 18.12.23
+
+* 
