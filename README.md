@@ -16,7 +16,7 @@ For now, our solution involves the following components:
 * Apache Hadoop 3.2.1 (namenode 2.0.0, java 8),
 * Apache NiFi 1.23.2,
 * Apache Kafka 3.4,
-* Apache Spark 3.0.0,
+* Apache Spark 3.2.0 (bitnami, Debian Linux) (bde2020, commented version, 3.0.0 (Alpine Linux)),
 * Apache HBase 2.2.6 (previously 1.2.6),
 * Apache Hive 2.3.2 (metastore-postgresql 2.3.0),
 * Apache Cassandra 4.0.11
@@ -73,7 +73,7 @@ Portainer service link: http://10.0.0.34:9000
 
 ## Containers
 
-If we provide one port it means that we have assigned the same port on localhost, e.g. 9870 equals 9870:9870. If we are mapping different ports, then we provide info like this (9001:9000). If single container exposes more ports, then we provide them after keyword `or`.
+If we provide one port it means that we have assigned the same port on localhost, e.g. 9870 equals 9870:9870. If we are mapping different ports, then we provide info like this (9001:9000). If single container exposes more ports, then we provide them after keyword `or`. If after the name you can see `^` indicator, it means that the containers are commented out/unavailable in final solution.
 
 * big-data-net:              10.0.0.0/16
 * hdfs-namenode:             10.0.0.2:9870 or 8020 or (9001:9000 - Spark)
@@ -85,14 +85,16 @@ If we provide one port it means that we have assigned the same port on localhost
 * news-scrapper:             10.0.0.8:(8012:80)
 * kafka0:                    10.0.0.10:(9094:9092)
 * kafka1:                    10.0.0.11:(9095:9092)
-* spark-master:              10.0.0.20:(9090:8080) or 7077
-* spark-worker-1:            10.0.0.21
-* jupyter:                   10.0.0.23:8888
-* jupyter_notebook:          10.0.0.24:(8889:8888)
+* spark-master^:             10.0.0.20:(9090:8080) or 7077
+* spark-worker-1^:           10.0.0.21:8081
+* jupyter^:                  10.0.0.23:8888
+* jupyter_notebook^:         10.0.0.24:(8889:8888)
+* spark-master-test:         10.0.0.25:(8082:8080) or (7078:7077)
+* spark-worker-test:         10.0.0.26:(8083:8081)
 * hive-server:               10.0.0.30:10000
 * hive-metastore             10.0.0.31:9083
 * hive-metastore-postgresql: 10.0.0.32
-* hbase:                     10.0.0.33:16000 or 16010 or 16020 or 16030 or 2888 or 3888 or 2181 or 9091:9090
+* hbase^:                    10.0.0.33:16000 or 16010 or 16020 or 16030 or 2888 or 3888 or 2181 or 9091:9090
 * portainer:                 10.0.0.34:9000
 * cassandra:                 10.0.0.40:7000 or 9042
 
@@ -110,13 +112,15 @@ Nodemanager: http://localhost:8042/node or http://10.0.0.5:8042/node
 
 NIFI: http://localhost:8080/nifi/ or http://10.0.0.6:8080/nifi/
 
-Spark Master: http://localhost:9090 or http://10.0.0.20:8080
+Spark Master^: http://localhost:9090 or http://10.0.0.20:8080
 
-Spark Worker 1: http://10.0.0.21:8081
+Spark Worker 1^: http://10.0.0.21:8081
 
-Spark Worker 2: http://10.0.0.22:8081
+Spark Master Test: http://localhost:8082 or http://10.0.0.25:8080
 
-Jupyter with PySpark: http://10.0.0.23:8888
+Spark Worker Test: http://10.0.0.26:8081
+
+Jupyter with PySpark^: http://10.0.0.23:8888
 
 Portainer: http://10.0.0.34:9000 (login: admin password: BigData123BigData123)
 
@@ -127,6 +131,9 @@ The `templates` file includes a NiFi templates used in our project. If you want 
 ## Development stories
 
 In the `Encountered issues.md` file you can read about the problems which occured during the project development, and get the insights into this process.
+
+
+
 
 # Not applicable anymore
 

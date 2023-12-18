@@ -45,30 +45,30 @@ services:
     cap_add:
       - NET_ADMIN
 
-  hbase:
-    image: coomia/hbase2.2:0.1
-    container_name: hbase
-    volumes:
-      - hbase_data:/hbase_data
-      - hbase_zookeeper_data:/zookeeper_data
-    ports:
-      - 16000:16000
-      - 16010:16010
-      - 16020:16020
-      - 16030:16030
-      - 2888:2888
-      - 3888:3888
-      - 2181:2181
-      - 9091:9090
-    environment:
-      SERVICE_PRECONDITION: "10.0.0.2:9870 10.0.0.3:9864"
-    networks:
-      big-data-net:
-        ipv4_address: 10.0.0.33
-    env_file:
-      - ./stack.env
-    cap_add:
-      - NET_ADMIN
+  #hbase:
+  #  image: coomia/hbase2.2:0.1
+  #  container_name: hbase
+  #  volumes:
+  #    - hbase_data:/hbase_data
+  #    - hbase_zookeeper_data:/zookeeper_data
+  #  ports:
+  #    - 16000:16000
+  #    - 16010:16010
+  #    - 16020:16020
+  #    - 16030:16030
+  #    - 2888:2888
+  #    - 3888:3888
+  #    - 2181:2181
+  #    - 9091:9090
+  #  environment:
+  #    SERVICE_PRECONDITION: "10.0.0.2:9870 10.0.0.3:9864"
+  #  networks:
+  #    big-data-net:
+  #      ipv4_address: 10.0.0.33
+  #  env_file:
+  #    - ./stack.env
+  #  cap_add:
+  #    - NET_ADMIN
 
   portainer:
     container_name: portainer
