@@ -1,3 +1,0 @@
-v1
-{"path":"file:///home/jovyan/work/outputs/part-00000-999fcd06-f3d8-4b11-8590-085ac09c64f0-c000.txt","size":3,"isDir":false,"modificationTime":1701964044153,"blockReplication":1,"blockSize":33554432,"action":"add"}
-{"path":"file:///home/jovyan/work/outputs/part-00001-148e53d9-cadf-4d39-a577-2a3c0d9d9505-c000.txt","size":5,"isDir":false,"modificationTime":1701964044674,"blockReplication":1,"blockSize":33554432,"action":"add"}

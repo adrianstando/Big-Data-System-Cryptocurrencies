@@ -1,3 +1,0 @@
-v1
-{"path":"file:///home/jovyan/work/outputs/part-00000-ea6409ad-05c7-47e7-a95e-131443033baf-c000.snappy.parquet","size":620,"isDir":false,"modificationTime":1701961621737,"blockReplication":1,"blockSize":33554432,"action":"add"}
-{"path":"file:///home/jovyan/work/outputs/part-00001-89e1c5cd-16c5-4c18-825a-386d8722c712-c000.snappy.parquet","size":620,"isDir":false,"modificationTime":1701961621736,"blockReplication":1,"blockSize":33554432,"action":"add"}
