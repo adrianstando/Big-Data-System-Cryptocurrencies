@@ -1,3 +1,5 @@
+# This is a crucial branch. It contains only the most important things. It was developed for the supervisor of the subject.
+
 # Big-Data-System-Cryptocurrencies
 
 This repository contains results of the project during Big Data Analytics course at 2nd semester of Master's Degree Studies in the field of Data Science at Warsaw University of Technology (WUT). Our developer team consists of 4 students: Maciej Pawlikowski, Hubert Ruczyński, Bartosz Siński, and Adrian Stańdo.
