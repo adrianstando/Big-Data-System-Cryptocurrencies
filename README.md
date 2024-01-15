@@ -146,13 +146,21 @@ The `templates` file includes NiFi templates used in our project. If you want to
 
 In the `Encountered issues.md` file you can read about the problems which occured during the project development, and get the insights into this process.
 
-## Porject architecture
+## Project architecture
 
 The diagram below present the logical architecture of our project.
+
+![diagram_MS4_project_architecture_final](https://github.com/adrianstando/Big-Data-System-Cryptocurrencies/assets/56126542/c1645440-b881-4d12-9397-886173e6a8fa)
+
 
 ## Exemplary results
 
 In this section we include exemplary views from the final dashboards presenting the outcomes, prepared in Power BI.
+
+![Dashboard_MS4_Batch_Views](https://github.com/adrianstando/Big-Data-System-Cryptocurrencies/assets/56126542/ba1d34c1-2f66-4884-bef0-9f87a74c3bae)
+![Dashboard_MS4_Real_Time_Views_2](https://github.com/adrianstando/Big-Data-System-Cryptocurrencies/assets/56126542/56d8fb7b-78de-480b-b5e3-4bceb531eb4a)
+![Dashboard_MS4_Dummy_predictor](https://github.com/adrianstando/Big-Data-System-Cryptocurrencies/assets/56126542/c8242c42-a5c1-45b7-a36a-deb5b5986484)
+
 
 # GitHub Structure
 
