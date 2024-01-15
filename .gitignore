@@ -30,3 +30,5 @@ outputs/newsapi.csv/
 
 COMPOSE_kafka-cluster/kafka1_data/data/
 COMPOSE_kafka-cluster/kafka0_data/data/
+
+COMPOSE_cassandra/cassandra_data_2/cassandra/data/data

@@ -26,14 +26,14 @@ Get to folder spark and execute:
 /spark/bin/spark-submit anyfilename.py
 ```
 
-### Legacy
+# Legacy
 
 ```
 docker cp -L your_program.py spark-master:/opt/bitnami/spark/anyfilename.py
 docker-compose exec spark-master spark-submit --master spark://10.30.0.20:7077 anyfilename.py
 ```
 
-### Check version
+## Check version
 
 To check spark, and scala version, run the following command in COMPOSE_spark folder:
 
@@ -45,9 +45,7 @@ docker-compose exec spark-master spark-submit --version
 
 If you work on the machine where all services are hosted, you can submit the scripts as shown in the Example. Otherwise you have to work with Portainer.
 
-TODO
-
-## Jupyter Notebook - finally we don't use it
+### Jupyter Notebook - finally we don't use it
 
 We use the Jupyter Notebook to develop the prototypes of the final solutions implemented in Apache Spark.
 
