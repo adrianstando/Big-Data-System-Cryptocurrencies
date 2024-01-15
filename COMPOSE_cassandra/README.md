@@ -7,3 +7,6 @@ To log in into cassandra shell, you have to use following command on the cassand
 ```
 cqlsh 10.0.0.40 -u cassandra -p cassandra
 ```
+## Login
+
+The login and password are the same: cassandra.

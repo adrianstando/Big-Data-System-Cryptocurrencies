@@ -75,7 +75,3 @@
 * Initially we intended to use a sentiment analysis model for whole texts, however it wieghted 0.5GB, which is too big for our containers, thus we decided to use smaller, one-sentence version, and aggregate the outcomes by assigning a mode of all sentences. It caused additional problems, as Spark 3.2 doesn't support this function, thus we had to design a workaround, which eventually worked out.
 
 * We spent whole day on working with streams, with symbolic results. We managed to introduce a data preprocessing and reasonable aggregations, however we still cannot join two streams.
-
-## 18.12.23
-
-* 

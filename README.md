@@ -2,7 +2,9 @@
 
 This repository contains results of the project during Big Data Analytics course at 2nd semester of Master's Degree Studies in the field of Data Science at Warsaw University of Technology (WUT). Our developer team consists of 4 students: Maciej Pawlikowski, Hubert Ruczyński, Bartosz Siński, and Adrian Stańdo.
 
-The aim of the project is to deploy an end-to-end solution based on the Big Data analytics platforms.
+TL;DR - The aim of the project is to deploy an end-to-end solution based on the Big Data analytics platforms.
+
+The goal of this project is to create a system that enables its users to investigate the influence of the latest news articles on the exchange rates of cryptocurrencies. Our tool scraps current exchange rates and recent news regarding cryptocurrencies in order to perform a sentiment analysis of those messages. Extracted features are provided to the time-series, online, predictive model that will present estimated exchange rates of selected cryptocurrencies based on recent data. The archival data is also maintained to analyze past trends and article occurrences. The end users are able to track current exchange rates, our predictions, and current evaluation scores for our models, as well as analyze past data.
 
 ## Technological stack
 
@@ -19,7 +21,8 @@ For now, our solution involves the following components:
 * Apache Spark 3.2.0 (bitnami, Debian Linux) (bde2020, commented version, 3.0.0 (Alpine Linux)),
 * Apache HBase 2.2.6 (previously 1.2.6),
 * Apache Hive 2.3.2 (metastore-postgresql 2.3.0),
-* Apache Cassandra 4.0.11
+* Apache Cassandra 4.0.11,
+* Power BI Desktop with ODBC drivers for Cassandra, and Hive from CData (30-day trial).
 
 ## How to run the project?
 
@@ -29,23 +32,33 @@ You need Docker (Linux) or Docker-Desktop (Windows) installed.
 
 You need WSL on Windows.
 
-You need at least 10GB of unused RAM memory for the sytem.
+You need at least 16GB (prefferably 24GB) of unused RAM memory for the sytem.
+
+You need a strong CPU (at least: 11th Gen Intel(R) Core(TM) i7-11700KF @3.60GHz).
+
+You need around 50GB of free disk space for images, and data.
 
 You need Tailscale (Linux) or Tailscale add-in (Windows) installed.
 
 You need proper tokens to the APIs mentioned somewhere in the main folders READMEs.
 
+You need Power BI Desktop with ODBC Drivers for Cassandra, and Hive (e.g. from CData): https://www.cdata.com/drivers/cassandra/download/odbc/ , https://www.cdata.com/drivers/hive/download/odbc/. During the installation/connection to the data sources you have to provide logins and passwords, which for Cassandra are: cassandra, cassandra, whereas for Hive: hive, hive.
+
 ### First-time set-up
 
 Each folder that start with `COMPOSE_*` contains `docker-compose.yaml` file to run different parts of the system. Study `README.md` files in each directory to see whether additional environment variables have to be set.
 
+#### Legacy
 Additionally you have to configure hive, during the first runs.
 
 ```
 docker cp hive-server:/opt/hive/conf/hive-site.xml .
-docker cp ./hive-site.xml spark-master:/spark/conf/
+docker cp ./hive-site.xml spark-master-test:/spark/conf/
+docker cp ./hive-site.xml spark-master-test:/opt/bitnami/spark/conf/
 rm ./hive-site.xml
 ```
+
+Not required anymore, as we implemented it in start.sh script.
 
 ### Starting containers
 
@@ -97,6 +110,7 @@ If we provide one port it means that we have assigned the same port on localhost
 * hbase^:                    10.0.0.33:16000 or 16010 or 16020 or 16030 or 2888 or 3888 or 2181 or 9091:9090
 * portainer:                 10.0.0.34:9000
 * cassandra:                 10.0.0.40:7000 or 9042
+* predictor:                 10:0.0.50:(8013:80)
 
 ## Web-Access
 
@@ -126,14 +140,29 @@ Portainer: http://10.0.0.34:9000 (login: admin password: BigData123BigData123)
 
 ## Additional data
 
-The `templates` file includes a NiFi templates used in our project. If you want to run it, copy the template to your NiFi. Probably you will additionally have to enable lots of services in the NiFi by hand, as we cannot do it automatically.
+The `templates` file includes NiFi templates used in our project. If you want to run it, copy the template to your NiFi. Probably you will additionally have to enable lots of services in the NiFi by hand, as we cannot do it automatically.
 
 ## Development stories
 
 In the `Encountered issues.md` file you can read about the problems which occured during the project development, and get the insights into this process.
 
+## Porject architecture
 
+The diagram below present the logical architecture of our project.
 
+## Exemplary results
+
+In this section we include exemplary views from the final dashboards presenting the outcomes, prepared in Power BI.
+
+# GitHub Structure
+
+* The COMPOSE files refer to particular docker container groups.
+* Pictures presents the diagrams, screenshots, and plots created during the project.
+* PowerBI contains things for this software.
+* Project_Deliverables has various deliverables in forms of reports and presentations mostly
+* PySpark_scripts gather all scripts used in the project.
+* templates contains NiFi templates.
+* Videos present short videos that present how the dashboard look-like.
 
 # Not applicable anymore
 

@@ -1,0 +1,25 @@
+version: '3'
+services:
+  predictor:
+    build:
+      context: ./predictor
+      dockerfile: Dockerfile
+    container_name: predictor
+    hostname: predictor
+    restart: unless-stopped
+    ports:
+      - 8013:80
+    networks:
+      big-data-net:
+        ipv4_address: 10.0.0.50
+
+networks:
+  big-data-net:
+    name: big-data-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16
+    external: true
+
+

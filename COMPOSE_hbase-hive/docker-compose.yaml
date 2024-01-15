@@ -39,11 +39,25 @@ services:
     container_name: hive-metastore-postgresql
     volumes:
       - ./metastore-postgresql/postgresql/data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     networks:
       big-data-net:
         ipv4_address: 10.0.0.32
+    ports:
+      - 5432:5432
     cap_add:
       - NET_ADMIN
+  
+  #presto-coordinator:
+  #  container_name: presto-coordinator
+  #  image: shawnzhu/prestodb:0.181
+  #  networks:
+  #    big-data-net:
+  #      ipv4_address: 10.0.0.33
+  #  ports:
+  #    - "8050:8080"
+  #  cap_add:
+  #    - NET_ADMIN
 
   #hbase:
   #  image: coomia/hbase2.2:0.1
@@ -69,7 +83,8 @@ services:
   #    - ./stack.env
   #  cap_add:
   #    - NET_ADMIN
-
+  
+    
   portainer:
     container_name: portainer
     image: portainer/portainer-ce:latest
@@ -84,12 +99,11 @@ services:
         ipv4_address: 10.0.0.34
     env_file:
       - ./stack.env
-      
 
 volumes:
-  hbase_data:
-  hbase_zookeeper_data:
-
+  pgdata:
+  #./metastore-postgresql/postgresql/data:
+  
 networks:
   big-data-net:
     name: big-data-net

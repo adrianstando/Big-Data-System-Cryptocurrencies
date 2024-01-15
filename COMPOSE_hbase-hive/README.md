@@ -3,7 +3,13 @@
 Version 2.3.2
 (metastore-postgresql 2.3.0)
 
-# HBase
+Login and password are the same: hive.
+
+We ran into some issues with regular volume mounting, thus eventually we created a named volume (pgdata) for hive-metastore-postgresql.
+
+# Unused
+
+## HBase
 
 Version: 2.2.6 (prevoiusly 1.2.6)
 
